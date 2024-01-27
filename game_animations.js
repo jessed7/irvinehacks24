@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("submit-button").addEventListener("click", function() {
-        document.getElementById("overlay").style.width = "100%"
+        document.getElementById("answer").contentEditable = "false"
         checkCorrect();
+        document.getElementById("overlay").style.width = "100%"
+        
     });
 });
 
@@ -11,13 +13,15 @@ function newPrompt() {
     console.log(promptelt, answerelt);
     promptelt.innerHTML = "what's 1+1"; //new prompt
     answerelt.innerHTML = "2"; //new answer
+    document.getElementById("overlay").style.width = "0";
 
 }
 
 function checkCorrect() {
-    // if incorrect, play shake animation and clear prompt and text html and damage player
-    // if correct, clear prompt and text html and damage slime
-    //document.getElementById("text").innerHTML === "getAnswerText()"
-    var container = document.getElementById("prompt");
-    container.style.animation = "tilt-shaking 0.5s"
+    // if incorrect, play shake animation and damage player
+    // if correct, damage slime
+    if (document.getElementById("answer").value != "ants") {
+        var container = document.getElementById("prompt");
+        container.style.animation = "tilt-shaking 0.3s";
+    }
 }
