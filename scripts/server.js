@@ -16,7 +16,14 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get('/update-cards', (req, res) => {
+app.push('/add-cards', (req, res) => {
+  
+  try{
+    const card = await
+
+  }catch{
+
+  }
 
 }
 );
