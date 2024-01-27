@@ -108,14 +108,7 @@ questionMap.set(question5.id,question5)
 difficultySort(idArray,questionMap)
 expect(idArray).toEqual([4,2,3,5,1])
 
-
-
-
 })
-
-
-
-
 
 
 
@@ -134,3 +127,5 @@ expect(selectRandomQuestion(idArray)).toEqual({
 
 
 //test random question
+
+

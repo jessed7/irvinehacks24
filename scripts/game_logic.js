@@ -4,6 +4,28 @@
 //questions: map
 
 
+//run if player gets question correct
+function increasePlayerEliminations(playerElims){
+    playerElims+=1
+}
+
+function dealDamage(enemy){
+    enemy.takeDamage()
+}
+
+
+function takeDamage(health,damageNumber){
+    health-=damageNumber
+}
+
+
+
+
+
+
+
+
+
 
 function mapToArray(questions){
     //questions: map[id:question]
@@ -78,6 +100,38 @@ function difficultySort(idArray,questionMap){
     console.log(weights)
     console.log(result)
 }
+
+
+
+class Enemy{
+    constructor(health, damageTaken){
+        this.health = health
+        this.damageTaken = damageTaken
+        this.isDead = false
+    }
+
+    takeDamage(){
+        this.health-= damageTaken
+        if (this.health<=0){
+            this.isDead = true
+        }
+    }
+    isDead(){
+        return isDead
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
