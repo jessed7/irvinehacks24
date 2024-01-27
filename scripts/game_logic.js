@@ -1,4 +1,4 @@
-function validateAnswer(Useranswer,id,question){
+function validateAnswer(UserAnswer,id,question){
     //answer:string
     //id:int
     //question:map
@@ -15,9 +15,29 @@ function validateAnswer(Useranswer,id,question){
 
 
 
+function selectRandomQuestion(questions){
+    const randomIndex = Math.floor(Math.random(),questions.length)
+    return questions[randomIndex]
+}
 
 
 
+
+
+
+
+
+
+
+
+/*
+let questions = [
+    question1,
+    question2,
+    question3,
+    ...
+]
+*/
 
 
 
@@ -30,7 +50,5 @@ numRight:0
 numWrong:0
 
 }
-
-
 */
 
