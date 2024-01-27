@@ -6,33 +6,32 @@
 
 
 function mapToArray(questions){
+    //questions: map[id:question]
+    //transforms map into an array of map keys
     return Array.from(questions.keys())
 }
 //var idArray = mapToArray(questions)
 
 
-function validateAnswer(UserAnswer,id,question){
+function validateAnswer(UserAnswer,id,question,questionIndex,questions){
     //answer:string
     //id:int
     //question:map
     var question = questionMap.get(id)
     if(answer===question.answer){
         question.numRight +=1
+        deleteQuestion(index,questions)
         return true
     }else{
         question.numWrong +=1
         return false
-
     }
 }
-
-
 
 
 function deleteQuestion(index,questions){
 //questions:array
 //index: int
-
 const tempValue = questions[index]
 questions[index] = questions[questions.length-1]
 questions[questions.length-1] = tempValue
