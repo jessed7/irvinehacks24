@@ -1,5 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
+    checkEmpty();
 });
+
+function checkEmpty() {
+    var isEmpty = document.getElementById("flashcards").innerHTML === '';
+    if (isEmpty) {
+        var imagediv = document.createElement("div");
+        var image = document.createElement('img');
+        image.src = "...";
+        imagediv.appendChild(image);
+        imagediv.style.display = "flex";
+        imagediv.style.alignItems = "center";
+        imagediv.style.justifyContent = "center";
+        imagediv.style.width = "100%"
+        flashcards.appendChild(imagediv);
+
+        document.getElementById("addflashcard").addEventListener("click", function() {
+            flashcards.removeChild(imagediv);
+        });
+    }
+}
 
 function addEditEventListener(button) {
     var isEdit = false;
@@ -29,6 +49,8 @@ function addDeleteEventListener(button) {
         var flashcards = document.getElementById("flashcards");
         var cardSpan = button.closest("span");
         flashcards.removeChild(cardSpan);
+
+        checkEmpty();
     });
 }
 

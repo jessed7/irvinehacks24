@@ -41,16 +41,14 @@
         
         
         <div style="display: flex; flex-direction: column; width: 100%; margin: 0; align-items: center; justify-content: center;">
-            <div id="flashcards" class="row" style="width: 70%; background-color: gainsboro; padding: 10px; border-radius: 20px; box-shadow: 2px 2px 1px 1px gainsboro;">
-
-            </div>
+            <div id="flashcards" class="row" style="width: 70%; background-color: gainsboro; padding: 10px; border-radius: 20px; box-shadow: 2px 2px 1px 1px gainsboro;"></div>
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
                 <div class="row" style="width: 70%; text-align: center;">
                     <div class="col" style="width: fit-content;">
-                        <button class="addflashcard" type="button" onclick="newCard()">+ Add Card</button>
+                        <button id="addflashcard" type="button" onclick="newCard()">+ Add Card</button>
                     </div>
                     <div class="col" style="width: fit-content;">
-                        <button class="studybtn" type="button">Study!</button>
+                        <button id="studybtn" type="button">Study!</button>
                     </div>
                 </div>
             </div>
