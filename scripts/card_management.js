@@ -11,8 +11,15 @@ const cards = new Map();
 
 document.addEventListener("DOMContentLoaded", function() {
     if (document.title === "Main") {
-        checkEmpty();
         addExistingCards(cards);
+        let isEmpty;
+        document.getElementById("addflashcard").addEventListener("click", function() {
+            const emptyImg = document.querySelector(".emptyImg");
+            if (emptyImg !== null) {
+                document.getElementById("flashcards").removeChild(emptyImg);
+            }
+        });
+        checkEmpty();
     }
     else if (document.title === "Game") {
         const submitButton = document.querySelector("#submit-button");
@@ -71,7 +78,8 @@ function getAnswerText() {
 
 
 function checkEmpty() {
-    var isEmpty = document.getElementById("flashcards").innerHTML === '';
+    // isEmpty = document.getElementById("flashcards").innerHTML === '';
+    isEmpty = !document.getElementById("flashcards").innerHTML.includes("prompt"); // If there are no cards, the word "prompt" will not appear
     if (isEmpty) {
         var imagediv = document.createElement("div");
         var image = document.createElement('img');
@@ -83,9 +91,7 @@ function checkEmpty() {
         imagediv.style.width = "100%"
         flashcards.appendChild(imagediv);
 
-        document.getElementById("addflashcard").addEventListener("click", function() {
-            flashcards.removeChild(imagediv);
-        });
+        imagediv.classList.toggle("emptyImg");
     }
 }
 
@@ -108,6 +114,11 @@ function addEditEventListener(button) {
             edibleanswer.ariaDisabled = false;
         }
 
+        if (isEdit) {
+            console.log(`ID of this card: ${cardID}`);
+            console.log(typeof(cardID));
+            editCard(parseInt(cardID), document.querySelector(`#promptinpt${cardID}`).innerHTML, document.querySelector(`#answerinpt${cardID}`).innerHTML);
+        }
         isEdit = !isEdit;
     });
 }
@@ -117,6 +128,7 @@ function addDeleteEventListener(button) {
         var flashcards = document.getElementById("flashcards");
         var cardSpan = button.closest("span");
         flashcards.removeChild(cardSpan);
+        deleteCard(parseInt(button.closest("span").id));
 
         checkEmpty();
     });
@@ -136,6 +148,7 @@ function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") 
     let cardID;
     if (id === -1) {
         cardID = Card.currentID; // CHANGE THIS TO BE THE CARD ID NUMBER IN CARD CLASS AND DO NOT INCREMENT IN FINAL BC CARD CLASS WILL DO THAT
+        addCard(prompt, answer);
     }
     else {
         cardID = id;
