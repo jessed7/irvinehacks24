@@ -32,6 +32,8 @@ function validateAnswer(UserAnswer,id,question,questionIndex,questions){
 function deleteQuestion(index,questions){
 //questions:array
 //index: int
+//swaps question id to be deleted with last question id in the array
+//for efficient removal of question id
 const tempValue = questions[index]
 questions[index] = questions[questions.length-1]
 questions[questions.length-1] = tempValue
