@@ -72,5 +72,13 @@ function newCard() {
 
     var deletebtn = appendspan.querySelector("#deletebtn");
     addDeleteEventListener(deletebtn);
+
+    // Add code for saving cards to the card list
     
+}
+
+function addExistingCards(currentCards) {
+    // This function will display all of the existing cards in the player's set
+    // Remember to add code for keeping track of player's current new card ID number
+
 }
