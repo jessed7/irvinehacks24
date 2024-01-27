@@ -115,26 +115,26 @@ function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") 
     addDeleteEventListener(deletebtn);
 }
 
-const cards = new Map(); // Connect this to the map in card_management.js later on, and them remove the copies of the Card class and addCard function
-class Card {
-    static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
-    constructor(id, prompt, answer) {
-        this.id = id;
-        this.prompt = prompt;
-        this.answer = answer;
-        this.numRight = 0;
-        this.numWrong = 0;
-    }
-}
+// const cards = new Map(); // Connect this to the map in card_management.js later on, and them remove the copies of the Card class and addCard function
+// class Card {
+//     static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
+//     constructor(id, prompt, answer) {
+//         this.id = id;
+//         this.prompt = prompt;
+//         this.answer = answer;
+//         this.numRight = 0;
+//         this.numWrong = 0;
+//     }
+// }
 
-function addCard(prompt, answer) {
-    // Based on a given prompt and answer, add a new Card to the cards map with an approiate ID number
-    const cardID = Card.currentID++;
-    cards.set(cardID, new Card(cardID, prompt, answer));
-}
-addCard("What is UCI's Mascot name?", "Peter");
-addCard("What year was UCI founded?", "1965");
-addCard("What is 1 + 1?", "2");
+// function addCard(prompt, answer) {
+//     // Based on a given prompt and answer, add a new Card to the cards map with an approiate ID number
+//     const cardID = Card.currentID++;
+//     cards.set(cardID, new Card(cardID, prompt, answer));
+// }
+// addCard("What is UCI's Mascot name?", "Peter");
+// addCard("What year was UCI founded?", "1965");
+// addCard("What is 1 + 1?", "2");
 function addExistingCards(currentCards) {
     // This function will display all of the existing cards in the player's set
     // Remember to add code for keeping track of player's current new card ID number
