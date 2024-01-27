@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     checkEmpty();
+    addExistingCards(cards);
 });
 
 function checkEmpty() {
@@ -55,17 +56,35 @@ function addDeleteEventListener(button) {
 }
 
 function newCard() {
+    addCardToScreen();
+
+    // Add code for saving cards to the card list
+    
+}
+
+function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") {
+    // Adds a card to the display
+    // Negative 1 signifies a new card
+    console.log(id)
+    let cardID;
+    if (id === -1) {
+        cardID = Card.currentID; // CHANGE THIS TO BE THE CARD ID NUMBER IN CARD CLASS AND DO NOT INCREMENT IN FINAL BC CARD CLASS WILL DO THAT
+    }
+    else {
+        cardID = id;
+    }
+
     // reminder to change span ids, promptinpts, and answerinpt ids
     var newCardHTML = 
 
     `<div class="col" style="text-align: left; padding: 0;">
-        <p id="promptinpt2" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">enter prompt</p>
+        <p id="promptinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${prompt}</p>
     </div>
     <div class="col-1" style="width: fit-content;">
         <h3 style="color: gainsboro;">|</h3>
     </div>
     <div class="col" style="text-align: left; padding: 0;">
-        <p id="answerinpt2" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">enter answer</p>
+        <p id="answerinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${answer}</p>
     </div>
     <div class="col-1" style="padding: 0; width: fit-content; padding-left: 10px;">
         <button id="editbtn" type="button" style="border: none; padding: 7px; background-color: gainsboro;">&#128393;</button>
@@ -84,7 +103,7 @@ function newCard() {
     appendspan.style.paddingTop = "12px";
     appendspan.style.paddingBottom = "12px";
     appendspan.innerHTML += newCardHTML;
-    appendspan.id = "2";
+    appendspan.id = cardID;
 
     var flashcards = document.getElementById("flashcards");
     flashcards.appendChild(appendspan);
@@ -94,13 +113,33 @@ function newCard() {
 
     var deletebtn = appendspan.querySelector("#deletebtn");
     addDeleteEventListener(deletebtn);
-
-    // Add code for saving cards to the card list
-    
 }
 
+const cards = new Map(); // Connect this to the map in card_management.js later on, and them remove the copies of the Card class and addCard function
+class Card {
+    static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
+    constructor(id, prompt, answer) {
+        this.id = id;
+        this.prompt = prompt;
+        this.answer = answer;
+        this.numRight = 0;
+        this.numWrong = 0;
+    }
+}
+
+function addCard(prompt, answer) {
+    // Based on a given prompt and answer, add a new Card to the cards map with an approiate ID number
+    const cardID = Card.currentID++;
+    cards.set(cardID, new Card(cardID, prompt, answer));
+}
+addCard("What is UCI's Mascot name?", "Peter");
+addCard("What year was UCI founded?", "1965");
+addCard("What is 1 + 1?", "2");
 function addExistingCards(currentCards) {
     // This function will display all of the existing cards in the player's set
     // Remember to add code for keeping track of player's current new card ID number
-
+    for (let i = 0; i < cards.size; i++) {
+        const card = cards.get(i);
+        addCardToScreen(card.id, card.prompt, card.answer);
+    }
 }
