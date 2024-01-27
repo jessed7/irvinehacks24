@@ -15,3 +15,5 @@ mongoose
   .catch((err) => console.log(err));
 
 app.get('/get-card');
+//this will have the random selection for the cards
+
