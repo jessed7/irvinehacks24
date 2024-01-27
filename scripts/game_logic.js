@@ -1,10 +1,4 @@
 
-
-
-//questions: map
-
-
-//run if player gets question correct
 function increasePlayerEliminations(playerElims){
     playerElims+=1
 }
@@ -17,14 +11,6 @@ function dealDamage(enemy){
 function takeDamage(health,damageNumber){
     health-=damageNumber
 }
-
-
-
-
-
-
-
-
 
 
 function mapToArray(questions){
@@ -62,7 +48,7 @@ questions[questions.length-1] = tempValue
 questions.pop()
 }
 
-
+//condition-> runs until array is empty
 function selectRandomQuestion(idArray){
     //uses a random index to select an id from the idArray and returns that index along with the id 
     //within an object literal.
@@ -73,9 +59,12 @@ function selectRandomQuestion(idArray){
     };
 }
 
-
+//requires an id array with id's in order to work,
+//id array needs to be reinitialized if we are deleing values from it every round.
 function difficultySort(idArray,questionMap){
     //computes randomization with weights
+    //questionMap only and convert to an array?
+
     var weights = []
     idArray.sort((a, b) => {
         const questionA = questionMap.get(a);
