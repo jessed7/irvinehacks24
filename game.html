@@ -13,18 +13,20 @@
     </div>
     <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; border: solid 2px gainsboro; border-radius: 20px;">
         <div class="row" style="width: 100%;">
-            <div class="col">
+            <div id="prompt" class="col">
                 <h3>prompt</h3>
                 <p>what is an anteater's favorite food?</p>
             </div>
             <div class="col">
                 <h3>answer:</h3>
-                <input type="text" style="width: 100%; border: none; border-bottom: solid 2px gainsboro; outline: none; padding: 7px;" placeholder="input answer">
+                <input id="answer" type="text" style="width: 100%; border: none; border-bottom: solid 2px gainsboro; outline: none; padding: 7px;" placeholder="input answer">
             </div>
         </div>
         <div class="row">
-            <button class="sumbitbtn" type="button">submit</button>
+            <button id="submit-button" class="sumbitbtn" type="button">submit</button>
         </div>
     </div>
+
+    <script src="scripts/card_management.js"></script>
 </body>
 </html>

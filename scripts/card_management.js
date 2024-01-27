@@ -40,3 +40,26 @@ function editCard(cardID, prompt, answer) {
 }
 
 // Before starting the battle portion of the game, save the current card set into the database for the player
+
+function setPrompt(cardID) {
+    // Based on the ID of a card, set the prompt box's text to the card's prompt
+    const card = cards.get(cardID);
+    const promptText = document.querySelector("#prompt p");
+    promptText.innerHTML = card.prompt;
+}
+
+function getAnswerText() {
+    // Returns the text currently in the answer text box
+    console.log(`The value of the answer box is: ${document.querySelector("#answer").value}`);
+    return document.querySelector("#answer").value;
+}
+
+const submitButton = document.querySelector("#submit-button");
+submitButton.addEventListener("click", getAnswerText);
+
+// Testing
+addCard("What is UCI's Mascot name?", "Peter");
+addCard("What year was UCI founded?", "1965");
+addCard("What is 1 + 1?", "2");
+console.log(cards);
+console.log(`The last card's ID is ${Card.currentID - 1}`);
