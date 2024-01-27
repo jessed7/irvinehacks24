@@ -12,15 +12,15 @@ function mapToArray(questions){
 }
 //var idArray = mapToArray(questions)
 
-
-function validateAnswer(UserAnswer,id,question,questionIndex,questions){
+//add toLowerCase
+function validateAnswer(userAnswer,id,questionIndex,questionArray,questionMap){
     //answer:string
     //id:int
     //question:map
     var question = questionMap.get(id)
-    if(answer===question.answer){
+    if(userAnswer===question.answer){
         question.numRight +=1
-        deleteQuestion(index,questions)
+        deleteQuestion(questionIndex,questionArray)
         return true
     }else{
         question.numWrong +=1
@@ -52,11 +52,25 @@ function selectRandomQuestion(idArray){
 }
 
 
+function difficultySort(idArray,questionMap){
+    idArray.sort((a, b) => {
+        const questionA = questionMap[a];
+        const questionB = questionMap[b];
+        const differenceA = questionA.numright - questionA.numwrong;
+        const differenceB = questionB.numright - questionB.numwrong;
+        return differenceB - differenceA; 
+      });
+    console.log(idArray)
+}
 
 
 
-
-
+module.exports = {
+    mapToArray,
+    validateAnswer,
+    deleteQuestion,
+    selectRandomQuestion
+}
 
 
 
