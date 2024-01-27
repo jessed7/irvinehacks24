@@ -70,10 +70,43 @@ expect(idQuestionArray).not.toContain(question2.id)
 
 
 test("weighted randomization",()=>{
-idArray = 
+var idArray = [1,2,3,4,5]
+var questionMap = new Map();
 
+var question1 = {
+    id: 1,
+    numRight: 0,
+    numWrong: 7
+}
+var question2 = {
+    id: 2,
+    numRight: 3,
+    numWrong: 0
+}
+var question3 = {
+    id: 3,
+    numRight: 4,
+    numWrong: 3
+}
+var question4 = {
+    id: 4,
+    numRight: 7,
+    numWrong: 0
+}
+var question5 = {
+    id: 5,
+    numRight: 3,
+    numWrong: 7
+}
 
-difficultySort()
+questionMap.set(question1.id,question1)
+questionMap.set(question2.id,question2)
+questionMap.set(question3.id,question3)
+questionMap.set(question4.id,question4)
+questionMap.set(question5.id,question5)
+
+difficultySort(idArray,questionMap)
+expect(idArray).toEqual([4,2,3,5,1])
 
 
 

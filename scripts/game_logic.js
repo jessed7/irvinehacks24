@@ -53,14 +53,29 @@ function selectRandomQuestion(idArray){
 
 
 function difficultySort(idArray,questionMap){
+    var weights = []
     idArray.sort((a, b) => {
-        const questionA = questionMap[a];
-        const questionB = questionMap[b];
-        const differenceA = questionA.numright - questionA.numwrong;
-        const differenceB = questionB.numright - questionB.numwrong;
+        const questionA = questionMap.get(a);
+        const questionB = questionMap.get(b);
+        const differenceA = questionA.numRight - questionA.numWrong;
+        const differenceB = questionB.numRight - questionB.numWrong;
         return differenceB - differenceA; 
       });
     console.log(idArray)
+
+    //create weights
+    for(i=1;i<=idArray.length;i++){
+        weights.push(i)
+    }
+
+    let randomArray = [];
+    idArray.forEach((item, index) => {
+        var clone = Array(weights[index]).fill(item);
+        randomArray.push(...clone);
+    });
+    const result = randomArray[~~(Math.random() * randomArray.length)]
+    console.log(weights)
+    console.log(result)
 }
 
 
@@ -69,7 +84,8 @@ module.exports = {
     mapToArray,
     validateAnswer,
     deleteQuestion,
-    selectRandomQuestion
+    selectRandomQuestion,
+    difficultySort
 }
 
 
