@@ -1,3 +1,16 @@
+
+
+
+//questions: map
+
+
+
+function mapToArray(questions){
+    return Array.from(questions.keys())
+}
+//var idArray = mapToArray(questions)
+
+
 function validateAnswer(UserAnswer,id,question){
     //answer:string
     //id:int
@@ -15,9 +28,26 @@ function validateAnswer(UserAnswer,id,question){
 
 
 
-function selectRandomQuestion(questions){
-    const randomIndex = Math.floor(Math.random(),questions.length)
-    return questions[randomIndex]
+
+function deleteQuestion(index,questions){
+//questions:array
+//index: int
+
+const tempValue = questions[index]
+questions[index] = questions[questions.length-1]
+questions[questions.length-1] = tempValue
+questions.pop()
+}
+
+
+function selectRandomQuestion(idArray){
+    //uses a random index to select an id from the idArray and returns that index along with the id 
+    //within an object literal.
+    const randomIndex = Math.floor(Math.random(),idArray.length)
+    return randomQuestion = {
+        id: idArray[randomIndex],
+        index: randomIndex
+    };
 }
 
 
