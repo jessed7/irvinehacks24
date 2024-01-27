@@ -8,22 +8,46 @@
     <title>Game</title>
 </head>
 <body>
-    <div class="slime" style="display: flex; justify-content: center; align-items: center; height: 60vh;">
-        <img src="..." alt="...">
+    <section>
+        <div style="display: flex; width: 100%; margin: 0; align-items: center; justify-content: center;">
+            <div class="row" style="width: 100%;">
+                <div class="col" style="padding: 0;">
+                    <h1>Slay 'n Study</h1>
+                </div>
+                <div class="col-4" style="text-align: center;">
+                    <button>Quit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="game" style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+        <div class="row" style="width: 100%; text-align: center;">
+            <div class="col">
+                <img id="slime" src="..." alt="...">
+            </div>
+            <div class="col">
+                <img id="knight" src="..." alt="...">
+            </div>
+        </div>
     </div>
-    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; border: solid 2px gainsboro; border-radius: 20px;">
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
         <div class="row" style="width: 100%;">
-            <div id="prompt" class="col">
-                <h3>prompt</h3>
-                <p>what is an anteater's favorite food?</p>
+            <div id="prompt" class="col" style="display: flex; justify-content: center; align-items: center; text-align: center; border: solid 2px gainsboro; border-radius: 20px;">
+                <p style="margin: 0;">what is an anteater's favorite food?</p>
             </div>
             <div class="col">
                 <h3>answer:</h3>
-                <input id="answer" type="text" style="width: 100%; border: none; border-bottom: solid 2px gainsboro; outline: none; padding: 7px;" placeholder="input answer">
+                <div class="row" style="display: flex; justify-content: end; align-items: end;">
+                    <div class="col" style="padding: 0;">
+                        <input id="answer" type="text" style="width: 100%; border: none; border-bottom: solid 2px gainsboro; outline: none; padding: 7px;" placeholder="input answer">
+                    </div>
+                    <div class="col-1" style="padding: 0;">
+                        <button id="submit-button" class="sumbitbtn" type="button">&#x2192</button>
+                    </div>
+                </div>
+                
             </div>
-        </div>
-        <div class="row">
-            <button id="submit-button" class="sumbitbtn" type="button">submit</button>
         </div>
     </div>
 

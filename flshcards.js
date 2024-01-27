@@ -58,13 +58,10 @@ function newCard() {
     // reminder to change span ids, promptinpts, and answerinpt ids
     var newCardHTML = 
 
-    `<div class="col" style="text-align: left; padding: 0;">
+    `<div class="col" style="text-align: left; padding: 0; padding-right: 5px;">
         <p id="promptinpt2" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">enter prompt</p>
     </div>
-    <div class="col-1" style="width: fit-content;">
-        <h3 style="color: gainsboro;">|</h3>
-    </div>
-    <div class="col" style="text-align: left; padding: 0;">
+    <div class="col" style="text-align: left; padding: 0; padding-left: 5px;">
         <p id="answerinpt2" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">enter answer</p>
     </div>
     <div class="col-1" style="padding: 0; width: fit-content; padding-left: 10px;">
