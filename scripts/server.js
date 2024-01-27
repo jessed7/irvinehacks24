@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+app.use(express.json())
+
 const URI =
   "mongodb+srv://nala:FQ4bPg3XnqV2P5SR@cluster0.qr5q198.mongodb.net/?retryWrites=true&w=majority";
 
@@ -14,6 +16,9 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get('/update');
-//this will have the random selection for the cards
+app.get('/update-cards', (req, res) => {
+
+}
+);
+
 
