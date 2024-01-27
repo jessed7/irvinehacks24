@@ -53,6 +53,7 @@ function selectRandomQuestion(idArray){
 
 
 function difficultySort(idArray,questionMap){
+    //computes randomization with weights
     var weights = []
     idArray.sort((a, b) => {
         const questionA = questionMap.get(a);
