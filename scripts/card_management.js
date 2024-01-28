@@ -29,8 +29,28 @@ document.addEventListener("DOMContentLoaded", function () {
       currentQuestion = selectRandomQuestion()
       currentCardID = currentQuestion.id
       currentCardIndex = currentQuestion.index
-      continueGame(cards.get(currentCardID).prompt,cards.get(currentCardID).answer);
+      console.log(currentCardID);
+      if(currentCardID !== undefined) {
+        continueGame(cards.get(currentCardID).prompt, cards.get(currentCardID).answer);
+      }
       console.log(cards)
+      console.log("before empty check");
+      if (idArray.length === 0) {
+        console.log("After empty");
+        const endScreen = document.createElement('div');
+        endScreen.id = "endScreen";
+        endScreen.innerHTML = `
+        <div id="endContainer">
+        <p>You answered a total of ${answered} questions!</p>
+        <button>Study More</button>
+        </div>
+        `;
+        // const studyButton = document.querySelector("#endContainer button");
+        // console.log(studyButton)
+
+        document.body.appendChild(endScreen);
+        document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+      }
     });
     
 });
@@ -412,11 +432,11 @@ function resetCardSet(){
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
-addCard("What year was UCI founded?", "1965");
-addCard("What is 1 + 1?", "2");
-addCard("Hey", "Hi");
-addCard("Type A", "A");
-addCard("Cake", "not real");
+// addCard("What year was UCI founded?", "1965");
+// addCard("What is 1 + 1?", "2");
+// addCard("Hey", "Hi");
+// addCard("Type A", "A");
+// addCard("Cake", "not real");
 console.log(cards);
 console.log(`The last card's ID is ${Card.currentID - 1}`);
 console.log(cards);
