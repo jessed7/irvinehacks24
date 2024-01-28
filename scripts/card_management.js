@@ -239,14 +239,13 @@ function addCardToScreen(
     cardID = id;
   }
 
-  // reminder to change span ids, promptinpts, and answerinpt ids
-  var newCardHTML = `<div class="col" style="text-align: left; padding: 0;">
+    // reminder to change span ids, promptinpts, and answerinpt ids
+    var newCardHTML = 
+
+    `<div class="col" style="text-align: left; padding: 0; padding-right: 5px;">
         <p id="promptinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${prompt}</p>
     </div>
-    <div class="col-1" style="width: fit-content;">
-        <h3 style="color: gainsboro;">|</h3>
-    </div>
-    <div class="col" style="text-align: left; padding: 0;">
+    <div class="col" style="text-align: left; padding: 0; padding-left: 5px;">
         <p id="answerinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${answer}</p>
     </div>
     <div class="col-1" style="padding: 0; width: fit-content; padding-left: 10px;">
@@ -274,8 +273,10 @@ function addCardToScreen(
   var editbtn = appendspan.querySelector("#editbtn");
   addEditEventListener(editbtn);
 
-  var deletebtn = appendspan.querySelector("#deletebtn");
-  addDeleteEventListener(deletebtn);
+    var deletebtn = appendspan.querySelector("#deletebtn");
+    addDeleteEventListener(deletebtn);
+
+    flashcards.scrollTop = flashcards.scrollHeight;
 }
 
 function addExistingCards(currentCards) {
