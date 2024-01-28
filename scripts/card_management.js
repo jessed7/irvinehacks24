@@ -411,8 +411,11 @@ function unpackUserData(userData) {
   let cardArray = userData.get("items");
 
   for(card of cardArray) {
-      cards.set(card.id, new Card(card.id, card.prompt, card.asnwer, card.numRight, card.numWrong));
+      cards.set(card.id, new Card(card.id, card.prompt, card.answer, card.numRight, card.numWrong));
+      console.log(cardArray);
+      
   }
+  console.log(cards);
 }    function reset() {
       console.log(cards)
     // checkCorrect();
@@ -436,7 +439,7 @@ function resetCardSet(){
 
 }
 
-/* 
+
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
@@ -448,7 +451,7 @@ addCard("Cake", "not real");
 console.log(cards);
 console.log(`The last card's ID is ${Card.currentID - 1}`);
 console.log(cards);
- */
+  
 
 //array stores id's of all cards in the cards map
 var idArray = mapToArray(cards);
