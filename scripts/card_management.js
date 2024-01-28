@@ -12,7 +12,7 @@ console.log(cards);
 // This will be the username taken from the landing page - change it eventually
 const username = "name";
 // Update the cardsAnswered variable with data from DB
-let answered = 0;
+let numCorrect = 0;
 
 console.log("imported!")
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         endScreen.id = "endScreen";
         endScreen.innerHTML = `
         <div id="endContainer">
-        <p>You answered a total of ${answered} questions!</p>
+        <p>You answered a total of ${numCorrect} questions correctly!</p>
         <button>Study More</button>
         </div>
         `;
@@ -80,6 +80,7 @@ function validateAnswer(
   var question = questionMap.get(id);
   if (userAnswer === question.answer) {
     question.numRight += 1;
+    numCorrect++;
     deleteQuestion(questionIndex, questionArray);
     return true;
   } else {
@@ -365,6 +366,8 @@ function checkCorrect() {
     }else{
         currentQuestion.numRight +=1
         deleteQuestion(currentCardIndex,idArray)
+        numCorrect++;
+
     }
 }
 
