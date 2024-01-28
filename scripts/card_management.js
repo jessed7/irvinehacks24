@@ -417,8 +417,11 @@ function unpackUserData(userData) {
   let cardArray = userData.get("items");
 
   for(card of cardArray) {
-      cards.set(card.id, new Card(card.id, card.prompt, card.asnwer, card.numRight, card.numWrong));
+      cards.set(card.id, new Card(card.id, card.prompt, card.answer, card.numRight, card.numWrong));
+      console.log(cardArray);
+      
   }
+  console.log(cards);
 }    function reset() {
       console.log(cards)
     // checkCorrect();
@@ -441,6 +444,7 @@ function resetCardSet(){
   document.body.removeChild(document.querySelector("#endScreen"));
 
 }
+
 
 
 // Testing
