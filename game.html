@@ -11,25 +11,35 @@
 </head>
 <body>
     <section>
-        <div style="display: flex; width: 100%; margin: 0; align-items: center; justify-content: center;">
+        <div style="display: flex; width: 100%; margin: 0; align-items: center; justify-content: center; padding: 20px;">
             <div class="row" style="width: 100%;">
                 <div class="col" style="padding: 0;">
                     <h1>Slay 'n Study</h1>
                 </div>
                 <div class="col-4" style="text-align: center;">
-                    <button>Quit</button>
+                    <button class="button" type="button" onclick="window.location.href = 'index.html'" style="padding-top: 5px; padding-bottom: 5px; width: 150px; border-radius: 10px;">Quit</button>
                 </div>
             </div>
         </div>
     </section>
 
     <div class="game" style="display: flex; justify-content: center; align-items: center; height: 70vh;">
-        <div class="row" style="width: 100%; text-align: center;">
-            <div class="col" style="width: 50%;">
-                <img id="knight" src="img/idle_knight.gif" alt="knight">
+        <div class="row" style="width: 100%;">
+            <div class="col" style="display: flex; flex-direction: column; width: 50%; justify-content: center; align-items: center;">
+                <div class="row">
+                    <img src="..." alt="...">
+                </div>
+                <div class="row">
+                    <img id="knight" src="img/idle_knight.gif" alt="knight">
+                </div>
             </div>
-            <div class="col" style="width: 50%;">
-                <img id="slime" src="img/idle_slime.gif" alt="slime">
+            <div class="col" style="display: flex; flex-direction: column; width: 50%; justify-content: end; align-items: center;">
+                <div class="row">
+                    <img src="..." alt="...">
+                </div>
+                <div class="row">
+                    <img id="slime" src="img/idle_slime.gif" alt="slime">
+                </div>
             </div>
         </div>
     </div>

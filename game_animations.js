@@ -19,6 +19,8 @@ function continueGame() {
         newPrompt();
         var idleslime = document.getElementById("slime");
         idleslime.src = "img/idle_slime.gif";
+        var idleknight = document.getElementById("knight");
+        idleknight.src = "img/idle_knight.gif";
     });
 }
 
@@ -40,8 +42,12 @@ function checkCorrect() {
     if (document.getElementById("answer").value != "ants") {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
     } else {
         var hurtslime = document.getElementById("slime");
-        hurtslime.src = "img/hurt_slime.gif"
+        hurtslime.src = "img/hurt_slime.gif";
+        var hitknight = document.getElementById("knight");
+        hitknight.src = "img/hit_knight.gif";
     }
 }
