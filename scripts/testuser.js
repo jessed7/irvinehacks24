@@ -47,7 +47,7 @@ async function updateCardData(user, cards, cardCount, cardsAnswered) {
   });
   console.log(cardData);
 
-  fetch("http://localhost:5000/backup-cards", {
+  fetch(`http://localhost:5000/data/${userID}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +63,7 @@ async function getUserData(userID) {
 //this function will query to the back end and get the map of all the user data given a userID
 
 //creating the URL
-  const endpoint = "http://localhost:5000/get-user-cards";
+  const endpoint = `http://localhost:5000/user/${userID}/backup-cards`;
   const queryParams = {
     user: userID,
   };

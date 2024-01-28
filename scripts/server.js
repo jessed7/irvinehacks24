@@ -19,7 +19,9 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/user/:user", async (req, res) => {
+
+//this will return the html for the card part of the game
+app.get("/game/:user", async(req, res) => {
   try {
     const userID = req.params.user;
     if (await User.exists({ user: userID })) {
@@ -28,7 +30,29 @@ app.get("/user/:user", async (req, res) => {
         .then((data) => {
           res.status(200);
           res.render('index');
-          //res.json(data[0]);
+          // Further processing with the retrieved data
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      res.status(404).json({message: 'ERROR: User Does Not Exist'})
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }});
+
+//this will get a json of the user data
+app.get("/data/:user", async (req, res) => {
+  try {
+    const userID = req.params.user;
+    if (await User.exists({ user: userID })) {
+      await User.find({ user: userID })
+        .exec()
+        .then((data) => {
+          res.status(200);
+          res.json(data[0]);
           // Further processing with the retrieved data
         })
         .catch((err) => {
@@ -52,11 +76,11 @@ app.get("/user/:user", async (req, res) => {
   }
 });
 
-app.post("/backup-cards", async (req, res) => {
+app.post("/user/:user/backup-cards", async (req, res) => {
   //this will try to update the cards list for the user given a json
   //const userID = req.body.user;
   try {
-    const userID = req.body.user;
+    const userID = req.params.user;
     if (await User.exists({ user: userID })) {
       console.log("user has been found: ", userID);
       await User.updateOne(
