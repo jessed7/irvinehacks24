@@ -5,12 +5,12 @@ When database storing is set up, follow this logic:
     1. If the player username is in the database, then place the flashcard data from the DB into the cards object
     2. If the username is not in the database, create a new Map to represent the cards
 */
-const userID = document.cookie;
+const userID = document.cookie.split("=")[1];
 const cards = new Map();
 console.log(cards);
 
 // This will be the username taken from the landing page - change it eventually
-const username = "name";
+
 // Update the cardsAnswered variable with data from DB
 let numCorrect = 0;
 
@@ -390,7 +390,7 @@ function deleteQuestion(index,questions){
     
 // This is code for packaging the data 
 function packUserData() {
-  const user = {
+  const data = {
       user: username,
       items: [],
       cardCount: Card.currentID,
@@ -398,10 +398,10 @@ function packUserData() {
   }
 
   for (let i = 0; i < cards.size; i++) {
-      user.items.push(cards.get(i));
+      data.items.push(cards.get(i));
   }
 
-  return JSON.stringify(user);
+  return JSON.stringify(data);
 }
 
 // This code unpacks the data from the DB into the cards map
@@ -436,7 +436,7 @@ function resetCardSet(){
 
 }
 
-
+/* 
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
@@ -448,7 +448,7 @@ addCard("Cake", "not real");
 console.log(cards);
 console.log(`The last card's ID is ${Card.currentID - 1}`);
 console.log(cards);
-
+ */
 
 //array stores id's of all cards in the cards map
 var idArray = mapToArray(cards);
@@ -466,30 +466,12 @@ var currentCardIndex = currentQuestion.index;
 console.log(cards)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-async function updateCardData(user, cards, cardCount, cardsAnswered) {
-  let cardData = JSON.stringify({
-    user: user,
-    items: Array.from(cards.values()),
-    cardCount: cardCount,
-    cardsAnswered: cardsAnswered,
-  });
+async function updateCardData(userID, cards, cardCount, cardsAnswered) {
+  //used the function instead of passing through the paramters, hopefully will be better
+  let cardData = packUserData();
   console.log(cardData);
 
-  fetch("http://localhost:5000/backup-cards", {
+  fetch("http://localhost:5500/backup-cards", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -501,11 +483,11 @@ async function updateCardData(user, cards, cardCount, cardsAnswered) {
     .catch((error) => console.error("Error:", error));
 }
 
-async function getUserData(userID) {
+async function getUserData() {
 //this function will query to the back end and get the map of all the user data given a userID
-
+  console.log('TRYING TO GET USER DATA');
 //creating the URL
-  const endpoint = "http://localhost:5000/get-user-cards";
+  const endpoint = "http://localhost:5500/get-user-cards";
   const queryParams = {
     user: userID,
   };
@@ -520,8 +502,8 @@ async function getUserData(userID) {
   const data = await response.json();
   const userData = new Map(Object.entries(data));
   console.log(userData);
-  return userData;
+  unpackUserData(userData);
 }
 
 
-
+getUserData();

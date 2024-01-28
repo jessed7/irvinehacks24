@@ -53,7 +53,7 @@
         </div>
     </section>
     <script>
-        document.getElementById("user").innerText = document.cookie;
+        document.getElementById("user").innerText = document.cookie.split("=")[1];
     </script>
     <script src="scripts/card_management.js"></script>
 </body>

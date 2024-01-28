@@ -2,8 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const User = require("./models/user");
+const cors = require('cors');
+
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5501');
+  // Other CORS headers...
+  next();
+});
+
 
 const URI =
   "mongodb+srv://nala:FQ4bPg3XnqV2P5SR@cluster0.qr5q198.mongodb.net/CardData?retryWrites=true&w=majority";
@@ -11,8 +19,8 @@ const URI =
 mongoose
   .connect(URI)
   .then((result) =>
-    app.listen(5000, () => {
-      console.log("Server Started on port 5000, connected to MongoDB");
+    app.listen(5500, () => {
+      console.log("Server Started on port 5500, connected to MongoDB");
     })
   )
   .catch((err) => console.log(err));
