@@ -425,7 +425,6 @@ function checkCorrect() {
         setHealthImg(playerHealth)
         if(playerHealth<=0){
           playerHealth = 4
-          setHealthImg(playerHealth)
           console.log("player dead")
           const endScreen = document.createElement('div');
           endScreen.id = "endScreen";
