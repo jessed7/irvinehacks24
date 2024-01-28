@@ -12,13 +12,22 @@
         <h1>Slay 'n Study</h1>
         <div class="row">
             <div class="col" style="text-align: end;">
-                <input type="text" style="border-radius: 10px;" placeholder="enter key">
+                <input id="text" style="border-radius: 10px;" placeholder="enter key">
             </div>
             <div class="col" style="text-align: left;">
-                <button class="button" type="button" style="border-radius: 10px;">&#x2192</button>
+                <button class="button" type="button" style="border-radius: 10px;" ondblclick = "logUser()">&#x2192</button>
             </div>
         </div>     
     </div>
-          
+          <script>
+            function logUser(){
+                //this should save the username in a json so it can be accessed across pages
+                //then it will go to index page with the cards
+                var username = document.getElementById('text').value;
+                document.cookie = `user=${username};`;
+                console.log(document.cookie);
+                window.location.href = "index.html";
+            }
+          </script>
 </body>
 </html>

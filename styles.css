@@ -48,3 +48,31 @@
     75% { transform: rotate(-2deg); }
     100% { transform: rotate(0deg); }
   }
+
+#endScreen {
+    background-color: rgba(0, 0, 0, 0.50);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 20%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#endContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrong {
+    background-color: rgb(255, 172, 172);
+}
+
+.right {
+    background-color: rgb(157, 235, 160);
+}
