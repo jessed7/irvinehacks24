@@ -17,40 +17,62 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/get-user-cards", async (req, res) => {});
+app.get("/get-user-cards", async (req, res) => {
+  try {
+    const userID = req.query.user;
+    if (await User.exists({ user: userID })) {
+      await User.find({ user: userID })
+        .exec()
+        .then((data) => {
+          res.json(data[0]);
+          // Further processing with the retrieved data
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      const userData = {
+        user: userID,
+        items: [],
+        cardCount: 0,
+        cardsAnswered: 0,
+      };
+      await User.create(userData);
+      res.status(200);
+      res.json(userData);
+    }
+    res.status(200);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 app.post("/backup-cards", async (req, res) => {
   //this will try to update the cards list for the user given a json
-  const userID = req.body.user;
-  console.log(userID);
+  //const userID = req.body.user;
   try {
-    if (User.exists({ user: userID })) {
-      console.log('user has been found');
-      let userData = await User.findOne({ user: userID })
+    const userID = req.body.user;
+    if (await User.exists({ user: userID })) {
+      console.log("user has been found: ", userID);
+      await User.updateOne(
+        { user: userID },
+        {
+          cardCount: req.body.cardCount,
+          cardsAnswered: req.body.cardsAnswered,
+          items: req.body.items,
+        }
+      )
         .then((docs) => {
           console.log("Result :", docs);
         })
         .catch((err) => {
           console.log(err);
         });
-
-        userData.items = req.body.items;
-        userData.cardCount = req.body.cardCount;
-        userData.cardsAnswered = req.body.cardsAnswered;
-
-      const user = await userData.save()
-        .save()
-        .then((docs) => {
-          console.log("Saved These Values:", docs);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     } else {
-      const user = await User.create(req.body);
+      await User.create(req.body);
     }
-
-    res.status(200).json(user);
+    res.status(200);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });

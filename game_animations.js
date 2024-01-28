@@ -9,16 +9,18 @@
 //     });
 // });
 
-// function continueGame(prompt,answer) {
-//     var parent = document.getElementById("prompt-container");
-//     var continuebtn = document.createElement("button");
-//     continuebtn.id = "continue";
-//     continuebtn.innerHTML = "next";
-//     parent.appendChild(continuebtn);
-//     continuebtn.addEventListener("click", function() {
-//         newPrompt(prompt,answer);
-//     });
-// }
+function continueGame() {
+    var parent = document.getElementById("prompt-container");
+    var continuebtn = document.createElement("button");
+    continuebtn.id = "continue";
+    continuebtn.innerHTML = "next";
+    parent.appendChild(continuebtn);
+    continuebtn.addEventListener("click", function() {
+        newPrompt();
+        var idleslime = document.getElementById("slime");
+        idleslime.src = "img/idle_slime.gif";
+    });
+}
 
 // function newPrompt(prompt = "cat",answer = 'dog') {
 //     // reminder to change prompts and answers to randomize those in the database
@@ -33,16 +35,13 @@
 
 // }
 
-// function checkCorrect() {
-//     // reminder to change comparison value to correct value stored in the database
-//     if (document.getElementById("answer").value != "ants") {
-//         var container = document.getElementById("prompt");
-//         container.style.animation = "tilt-shaking 0.3s";
-//     }
-// }
-
-// module.exports = {
-//     checkCorrect,
-//     newPrompt,
-//     continueGame
-// }
+function checkCorrect() {
+    // reminder to change comparison value to correct value stored in the database
+    if (document.getElementById("answer").value != "ants") {
+        var container = document.getElementById("prompt");
+        container.style.animation = "tilt-shaking 0.3s";
+    } else {
+        var hurtslime = document.getElementById("slime");
+        hurtslime.src = "img/hurt_slime.gif"
+    }
+}

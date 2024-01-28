@@ -5,8 +5,14 @@ When database storing is set up, follow this logic:
     1. If the player username is in the database, then place the flashcard data from the DB into the cards object
     2. If the username is not in the database, create a new Map to represent the cards
 */
+
 const cards = new Map();
 console.log(cards);
+
+// This will be the username taken from the landing page - change it eventually
+const username = "name";
+// Update the cardsAnswered variable with data from DB
+let answered = 0;
 
 console.log("imported!")
 
@@ -97,12 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
 // This class will represent each card
 class Card {
   static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
-  constructor(id, prompt, answer) {
+  constructor(id, prompt, answer, numRight=0, numWrong=0) {
     this.id = id;
     this.prompt = prompt;
     this.answer = answer;
-    this.numRight = 0;
-    this.numWrong = 0;
+    this.numRight = numRight;
+    this.numWrong = numWrong;
   }
 }
 
@@ -239,14 +245,13 @@ function addCardToScreen(
     cardID = id;
   }
 
-  // reminder to change span ids, promptinpts, and answerinpt ids
-  var newCardHTML = `<div class="col" style="text-align: left; padding: 0;">
+    // reminder to change span ids, promptinpts, and answerinpt ids
+    var newCardHTML = 
+
+    `<div class="col" style="text-align: left; padding: 0; padding-right: 5px;">
         <p id="promptinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${prompt}</p>
     </div>
-    <div class="col-1" style="width: fit-content;">
-        <h3 style="color: gainsboro;">|</h3>
-    </div>
-    <div class="col" style="text-align: left; padding: 0;">
+    <div class="col" style="text-align: left; padding: 0; padding-left: 5px;">
         <p id="answerinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${answer}</p>
     </div>
     <div class="col-1" style="padding: 0; width: fit-content; padding-left: 10px;">
@@ -274,8 +279,10 @@ function addCardToScreen(
   var editbtn = appendspan.querySelector("#editbtn");
   addEditEventListener(editbtn);
 
-  var deletebtn = appendspan.querySelector("#deletebtn");
-  addDeleteEventListener(deletebtn);
+    var deletebtn = appendspan.querySelector("#deletebtn");
+    addDeleteEventListener(deletebtn);
+
+    flashcards.scrollTop = flashcards.scrollHeight;
 }
 
 function addExistingCards(currentCards) {
@@ -306,6 +313,8 @@ function continueGame(prompt,answer) {
     continuebtn.addEventListener("click", function() {
         console.log(cards)
         newPrompt(prompt,answer);
+        var idleslime = document.getElementById("slime");
+        idleslime.src = "img/idle_slime.gif";
     });
 }
 
@@ -350,9 +359,33 @@ function deleteQuestion(index,questions){
     questions.pop()
     }
 
+    
+// This is code for packaging the data 
+function packUserData() {
+  const user = {
+      user: username,
+      items: [],
+      cardCount: Card.currentID,
+      cardsAnswered: numCorrect // Add code for tracking cards answered
+  }
 
+  for (let i = 0; i < cards.size; i++) {
+      user.items.push(cards.get(i));
+  }
 
-    function reset() {
+  return JSON.stringify(user);
+}
+
+// This code unpacks the data from the DB into the cards map
+function unpackUserData(userData) {
+  Card.currentID = userData.get("cardCount");
+  numCorrect = userData.get("cardsAnswered"); // Change var name as needed
+  let cardArray = userData.get("items");
+
+  for(card of cardArray) {
+      cards.set(card.id, new Card(card.id, card.prompt, card.asnwer, card.numRight, card.numWrong));
+  }
+}    function reset() {
       console.log(cards)
     // checkCorrect();
     document.getElementById("overlay").style.width = "100%";
