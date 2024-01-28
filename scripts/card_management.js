@@ -416,8 +416,6 @@ function checkCorrect() {
         document.querySelector("#answer").classList.add("wrong");
         playerHealth -= 1
         if(playerHealth<=0){
-          var continuebtn = document.getElementById("continue");
-          document.getElementById("prompt-container").removeChild(continuebtn);
           playerHealth = 4
           console.log("player dead")
           const endScreen = document.createElement('div');
@@ -433,6 +431,8 @@ function checkCorrect() {
 
           document.body.appendChild(endScreen);
           document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+          var continuebtn = document.getElementById("continue");
+          document.getElementById("prompt-container").removeChild(continuebtn);
         }
         
     }else{
