@@ -569,19 +569,6 @@ class Enemy{
   }
 }
 
-// Testing
-console.log(cards);
-addCard("What is UCI's Mascot name?", "Peter");
-addCard("What year was UCI founded?", "1965");
-addCard("What is 1 + 1?", "2");
-addCard("Hey", "Hi");
-addCard("Type A", "A");
-addCard("Cake", "not real");
-console.log(cards);
-console.log(`The last card's ID is ${Card.currentID - 1}`);
-console.log(cards);
- 
-
 //array stores id's of all cards in the cards map
 
 var idArray = mapToArray(cards);
