@@ -134,12 +134,7 @@ function addDeleteEventListener(button) {
     });
 }
 
-function newCard() {
-    addCardToScreen();
 
-    // Add code for saving cards to the card list
-    
-}
 
 function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") {
     // Adds a card to the display
@@ -193,6 +188,13 @@ function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") 
 
     var deletebtn = appendspan.querySelector("#deletebtn");
     addDeleteEventListener(deletebtn);
+}
+
+function newCard() {
+    addCardToScreen();
+
+    // Add code for saving cards to the card list
+    
 }
 
 function addExistingCards(currentCards) {

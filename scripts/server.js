@@ -4,6 +4,8 @@ const app = express();
 const User = require("./models/user");
 
 app.use(express.json());
+app.set("view engine", "ejs");
+app.use(express.static('public'));
 
 const URI =
   "mongodb+srv://nala:FQ4bPg3XnqV2P5SR@cluster0.qr5q198.mongodb.net/CardData?retryWrites=true&w=majority";
@@ -17,26 +19,37 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.get("/get-user-cards", async (req, res) => {
+app.get("/user/:user", async (req, res) => {
   try {
-    const userID = req.query.user;
+    const userID = req.params.user;
     if (await User.exists({ user: userID })) {
-      await User.find({user: userID}).exec().then(data => {
-        res.json(data[0]);
-        // Further processing with the retrieved data
-      })
-      .catch(err => {
-        console.error(err);
-      });
+      await User.find({ user: userID })
+        .exec()
+        .then((data) => {
+          res.status(200);
+          res.render('index');
+          //res.json(data[0]);
+          // Further processing with the retrieved data
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
-      res.status(404).json({message: 'ERROR: User does not exist'});
+      const userData = {
+        user: userID,
+        items: [],
+        cardCount: 0,
+        cardsAnswered: 0,
+      }
+      await User.create(userData);
+      res.status(200);
+      res.sendFile('index');
+      //res.json(userData);
     }
-    res.status(200);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
   }
-
 });
 
 app.post("/backup-cards", async (req, res) => {
