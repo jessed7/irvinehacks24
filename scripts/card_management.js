@@ -8,53 +8,22 @@ When database storing is set up, follow this logic:
 const userID = document.cookie.split("=")[1];
 const cards = new Map();
 console.log(cards);
+var idArray = [];
+var currentQuestion = {};
+var currentCardID = 0;
+var currentCardIndex = 0;
 
 // This will be the username taken from the landing page - change it eventually
 
 // Update the cardsAnswered variable with data from DB
 let numCorrect = 0;
 
-console.log("imported!")
-
+console.log("imported!");
+/* 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log(cards)
-  document
-    .getElementById("submit-button")
-    .addEventListener("click", function () {
-        console.log(cards)
-      checkCorrect();
-      document.getElementById("overlay").style.width = "100%";
-      document.getElementById("text").style.visibility = "visible";
-      console.log(cards)
-      currentQuestion = selectRandomQuestion()
-      currentCardID = currentQuestion.id
-      currentCardIndex = currentQuestion.index
-      console.log(currentCardID);
-      if(currentCardID !== undefined) {
-        continueGame(cards.get(currentCardID).prompt, cards.get(currentCardID).answer);
-      }
-      console.log(cards)
-      console.log("before empty check");
-      document.querySelector("#answer").value="";
-      if (idArray.length === 0) {
-        console.log("After empty");
-        const endScreen = document.createElement('div');
-        endScreen.id = "endScreen";
-        endScreen.innerHTML = `
-        <div id="endContainer">
-        <p>You answered a total of ${numCorrect} questions correctly!</p>
-        <button>Study More</button>
-        </div>
-        `;
-        // const studyButton = document.querySelector("#endContainer button");
-        // console.log(studyButton)
-
-        document.body.appendChild(endScreen);
-        document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
-      }
-    });
     
-});
+    
+}); */
 
 //imports from game_logic.js
 
@@ -76,7 +45,7 @@ function validateAnswer(
   //answer:string
   //id:int
   //question:map
-  console.log(questionMap)
+  console.log(questionMap);
   var question = questionMap.get(id);
   if (userAnswer === question.answer) {
     question.numRight += 1;
@@ -92,13 +61,92 @@ function selectRandomQuestion() {
   //uses a random index to select an id from the idArray and returns that index along with the id
   //within an object literal.
   const randomIndex = Math.floor(Math.random() * idArray.length);
-  return ({
+  return {
     id: idArray[randomIndex],
     index: randomIndex,
-  });
+  };
 }
 
+/////////////////////////////////////////////////////
+//TEST CODE
+function loadGame() {
+  if (document.title === "Main") {
+    console.log(cards);
 
+    console.log("INSIDE THE LOADING SCREEN");
+    addExistingCards();
+    let isEmpty;
+    document
+      .getElementById("addflashcard")
+      .addEventListener("click", function () {
+        const emptyImg = document.querySelector(".emptyImg");
+        if (emptyImg !== null) {
+          document.getElementById("flashcards").removeChild(emptyImg);
+        }
+      });
+    checkEmpty();
+  } else if (document.title === "Game") {
+    console.log('HERES TEH MAP', cards);
+    console.log("PRINTING GAMEEE");
+    const submitButton = document.querySelector("#submit-button");
+    submitButton.addEventListener("click", getAnswerText);
+
+    //code from the bottom to hopefully work
+    idArray = mapToArray(cards);
+    console.log(idArray);
+    currentQuestion = selectRandomQuestion();
+    console.log(cards);
+    currentCardID = currentQuestion.id;
+    console.log("THE CARD IS HERE: ", currentQuestion);
+    currentCardIndex = currentQuestion.index;
+
+
+
+    setPrompt(currentCardID);
+    document.querySelector("#text").innerHTML = cards.get(currentCardID).answer;
+    console.log(cards)
+    document
+      .getElementById("submit-button")
+      .addEventListener("click", function () {
+          console.log(cards)
+        checkCorrect();
+        document.getElementById("overlay").style.width = "100%";
+        document.getElementById("text").style.visibility = "visible";
+        console.log(cards)
+        currentQuestion = selectRandomQuestion()
+        currentCardID = currentQuestion.id
+        currentCardIndex = currentQuestion.index
+        console.log(currentCardID);
+        if(currentCardID !== undefined) {
+          continueGame(cards.get(currentCardID).prompt, cards.get(currentCardID).answer);
+        }
+        console.log(cards)
+        console.log("before empty check");
+        document.querySelector("#answer").value="";
+        if (idArray.length === 0) {
+          console.log("After empty");
+          const endScreen = document.createElement('div');
+          endScreen.id = "endScreen";
+          endScreen.innerHTML = `
+          <div id="endContainer">
+          <p>You answered a total of ${numCorrect} questions correctly!</p>
+          <button>Study More</button>
+          </div>
+          `;
+          // const studyButton = document.querySelector("#endContainer button");
+          // console.log(studyButton)
+  
+          document.body.appendChild(endScreen);
+          document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+        }
+      });
+    //gameLoop();
+  }
+}
+
+//////////////////////////////////////////////////////////
+
+/* 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.title === "Main") {
     addExistingCards(cards);
@@ -120,12 +168,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //gameLoop();
   }
-});
+}); */
 
 // This class will represent each card
 class Card {
   static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
-  constructor(id, prompt, answer, numRight=0, numWrong=0) {
+  constructor(id, prompt, answer, numRight = 0, numWrong = 0) {
     this.id = id;
     this.prompt = prompt;
     this.answer = answer;
@@ -162,6 +210,7 @@ function setPrompt(cardID) {
   console.log(card);
   const promptText = document.querySelector("#prompt p");
   console.log(promptText);
+  console.log("HERE IS THE CARD:",card);
   promptText.innerHTML = card.prompt;
 }
 
@@ -171,14 +220,14 @@ function getAnswerText() {
     `The value of the answer box is: ${document.querySelector("#answer").value}`
   );
   //return document.querySelector("#answer").value;
-  console.log(cards)
-//   validateAnswer(
-//     document.querySelector("#answer").value,
-//     currentCardID,
-//     currentCardIndex,
-//     idArray,
-//     cards
-//   );
+  console.log(cards);
+  //   validateAnswer(
+  //     document.querySelector("#answer").value,
+  //     currentCardID,
+  //     currentCardIndex,
+  //     idArray,
+  //     cards
+  //   );
   console.log(idArray);
 }
 
@@ -267,10 +316,8 @@ function addCardToScreen(
     cardID = id;
   }
 
-    // reminder to change span ids, promptinpts, and answerinpt ids
-    var newCardHTML = 
-
-    `<div class="col" style="text-align: left; padding: 0; padding-right: 5px;">
+  // reminder to change span ids, promptinpts, and answerinpt ids
+  var newCardHTML = `<div class="col" style="text-align: left; padding: 0; padding-right: 5px;">
         <p id="promptinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${prompt}</p>
     </div>
     <div class="col" style="text-align: left; padding: 0; padding-left: 5px;">
@@ -301,13 +348,13 @@ function addCardToScreen(
   var editbtn = appendspan.querySelector("#editbtn");
   addEditEventListener(editbtn);
 
-    var deletebtn = appendspan.querySelector("#deletebtn");
-    addDeleteEventListener(deletebtn);
+  var deletebtn = appendspan.querySelector("#deletebtn");
+  addDeleteEventListener(deletebtn);
 
-    flashcards.scrollTop = flashcards.scrollHeight;
+  flashcards.scrollTop = flashcards.scrollHeight;
 }
 
-function addExistingCards(currentCards) {
+function addExistingCards() {
   // This function will display all of the existing cards in the player's set
   // Remember to add code for keeping track of player's current new card ID number
   for (let i = 0; i < cards.size; i++) {
@@ -345,19 +392,19 @@ function continueGame(prompt,answer) {
     });
 }
 
-function newPrompt(prompt = "cat",answer = 'dog') {
-    console.log(cards)
-    // reminder to change prompts and answers to randomize those in the database
-    var promptelt = document.getElementById("prompt").querySelector("p");
-    var answerelt = document.getElementById("text");
-    promptelt.innerHTML = prompt; //new prompt
-    answerelt.innerHTML = answer; //new answer
-    answerelt.style.visibility = "hidden";
-    console.log(cards)
-    document.getElementById("overlay").style.width = "0";
-    var continuebtn = document.getElementById("continue");
-    document.getElementById("prompt-container").removeChild(continuebtn);
-    console.log(cards)
+function newPrompt(prompt = "cat", answer = "dog") {
+  console.log(cards);
+  // reminder to change prompts and answers to randomize those in the database
+  var promptelt = document.getElementById("prompt").querySelector("p");
+  var answerelt = document.getElementById("text");
+  promptelt.innerHTML = prompt; //new prompt
+  answerelt.innerHTML = answer; //new answer
+  answerelt.style.visibility = "hidden";
+  console.log(cards);
+  document.getElementById("overlay").style.width = "0";
+  var continuebtn = document.getElementById("continue");
+  document.getElementById("prompt-container").removeChild(continuebtn);
+  console.log(cards);
 }
 
 function checkCorrect() {
@@ -406,30 +453,28 @@ function checkCorrect() {
     }
 }
 
+function deleteQuestion(index, questions) {
+  //questions:array
+  //index: int
+  //swaps question id to be deleted with last question id in the array
+  //for efficient removal of question id
+  const tempValue = questions[index];
+  questions[index] = questions[questions.length - 1];
+  questions[questions.length - 1] = tempValue;
+  questions.pop();
+}
 
-function deleteQuestion(index,questions){
-    //questions:array
-    //index: int
-    //swaps question id to be deleted with last question id in the array
-    //for efficient removal of question id
-    const tempValue = questions[index]
-    questions[index] = questions[questions.length-1]
-    questions[questions.length-1] = tempValue
-    questions.pop()
-    }
-
-    
-// This is code for packaging the data 
+// This is code for packaging the data
 function packUserData() {
   const data = {
-      user: username,
-      items: [],
-      cardCount: Card.currentID,
-      cardsAnswered: numCorrect // Add code for tracking cards answered
-  }
+    user: userID,
+    items: [],
+    cardCount: Card.currentID,
+    cardsAnswered: numCorrect, // Add code for tracking cards answered
+  };
 
   for (let i = 0; i < cards.size; i++) {
-      data.items.push(cards.get(i));
+    data.items.push(cards.get(i));
   }
 
   return JSON.stringify(data);
@@ -441,31 +486,35 @@ function unpackUserData(userData) {
   numCorrect = userData.get("cardsAnswered"); // Change var name as needed
   let cardArray = userData.get("items");
 
-  for(card of cardArray) {
-      cards.set(card.id, new Card(card.id, card.prompt, card.answer, card.numRight, card.numWrong));
-      console.log(cardArray);
-      
+  for (card of cardArray) {
+    cards.set(
+      card.id,
+      new Card(card.id, card.prompt, card.answer, card.numRight, card.numWrong)
+    );
+    console.log(cardArray);
   }
+  loadGame();
+}
+
+function reset() {
   console.log(cards);
-}    function reset() {
-      console.log(cards)
-    // checkCorrect();
-    document.getElementById("overlay").style.width = "100%";
-    document.getElementById("text").style.visibility = "visible";
-    console.log(cards)
-    currentQuestion = selectRandomQuestion()
-    currentCardID = currentQuestion.id
-    currentCardIndex = currentQuestion.index
-    continueGame(cards.get(currentCardID).prompt,cards.get(currentCardID).answer);
-    console.log(cards)
-  }
+  // checkCorrect();
+  document.getElementById("overlay").style.width = "100%";
+  document.getElementById("text").style.visibility = "visible";
+  console.log(cards);
+  currentQuestion = selectRandomQuestion();
+  currentCardID = currentQuestion.id;
+  currentCardIndex = currentQuestion.index;
+  continueGame(
+    cards.get(currentCardID).prompt,
+    cards.get(currentCardID).answer
+  );
+  console.log(cards);
+}
 
-
-
-
-function resetCardSet(){
-  idArray = mapToArray(cards)
-  reset()
+function resetCardSet() {
+  idArray = mapToArray(cards);
+  reset();
   document.body.removeChild(document.querySelector("#endScreen"));
 
 }
@@ -504,13 +553,15 @@ const damageTaken = 1
 // var currentCardId
 // var currentCardIndex
 
-console.log(cards)
+//array stores id's of all cards in the cards map
 
 
-async function updateCardData(userID, cards, cardCount, cardsAnswered) {
+console.log(cards);
+
+async function updateCardData() {
   //used the function instead of passing through the paramters, hopefully will be better
   let cardData = packUserData();
-  console.log(cardData);
+  console.log("UPDATING CARDS", cardData);
 
   fetch("http://localhost:5500/backup-cards", {
     method: "POST",
@@ -525,9 +576,9 @@ async function updateCardData(userID, cards, cardCount, cardsAnswered) {
 }
 
 async function getUserData() {
-//this function will query to the back end and get the map of all the user data given a userID
-  console.log('TRYING TO GET USER DATA');
-//creating the URL
+  //this function will query to the back end and get the map of all the user data given a userID
+  console.log("TRYING TO GET USER DATA");
+  //creating the URL
   const endpoint = "http://localhost:5500/get-user-cards";
   const queryParams = {
     user: userID,
@@ -546,5 +597,5 @@ async function getUserData() {
   unpackUserData(userData);
 }
 
-
 getUserData();
+

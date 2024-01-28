@@ -7,6 +7,7 @@ const User = require("./models/user");
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5501');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   // Other CORS headers...
   next();
 });
@@ -25,6 +26,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.get("/get-user-cards", async (req, res) => {
+  console.log("GETTING USER CARDS");
   try {
     const userID = req.query.user;
     if (await User.exists({ user: userID })) {
@@ -58,6 +60,7 @@ app.get("/get-user-cards", async (req, res) => {
 app.post("/backup-cards", async (req, res) => {
   //this will try to update the cards list for the user given a json
   //const userID = req.body.user;
+  console.log("ATTEMPTING TO UPDATE CARDS");
   try {
     const userID = req.body.user;
     if (await User.exists({ user: userID })) {
