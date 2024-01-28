@@ -190,7 +190,7 @@ function checkEmpty() {
   if (isEmpty) {
     var imagediv = document.createElement("div");
     var image = document.createElement("img");
-    image.src = "...";
+    image.src = "img/nocards.gif";
     imagediv.appendChild(image);
     imagediv.style.display = "flex";
     imagediv.style.alignItems = "center";
@@ -337,6 +337,8 @@ function continueGame(prompt,answer) {
         newPrompt(prompt,answer);
         var idleslime = document.getElementById("slime");
         idleslime.src = "img/idle_slime.gif";
+        var idleknight = document.getElementById("knight");
+        idleknight.src = "img/idle_knight.gif";
         document.querySelector("#answer").classList.remove("wrong");
         document.querySelector("#answer").classList.remove("right");
     });
@@ -363,10 +365,16 @@ function checkCorrect() {
     if (document.getElementById("answer").value.toLowerCase() != currentQuestion.answer.toLowerCase()) {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
         currentQuestion.numWrong += 1;
         document.querySelector("#answer").classList.add("wrong");
         
     }else{
+        var hurtslime = document.getElementById("slime");
+        hurtslime.src = "img/hurt_slime.gif";
+        var hitknight = document.getElementById("knight");
+        hitknight.src = "img/hit_knight.gif";
         currentQuestion.numRight +=1
         deleteQuestion(currentCardIndex,idArray)
         numCorrect++;
