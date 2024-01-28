@@ -17,6 +17,8 @@ function continueGame() {
     parent.appendChild(continuebtn);
     continuebtn.addEventListener("click", function() {
         newPrompt();
+        var idleslime = document.getElementById("slime");
+        idleslime.src = "img/idle_slime.gif";
     });
 }
 
@@ -38,5 +40,9 @@ function checkCorrect() {
     if (document.getElementById("answer").value != "ants") {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
+        var hurtslime = document.getElementById("slime");
+        hurtslime.src = "img/hurt_slime.gif"
+    } else {
+        
     }
 }
