@@ -352,6 +352,28 @@ function deleteQuestion(index,questions){
 
 
 
+    function reset() {
+      console.log(cards)
+    // checkCorrect();
+    document.getElementById("overlay").style.width = "100%";
+    document.getElementById("text").style.visibility = "visible";
+    console.log(cards)
+    currentQuestion = selectRandomQuestion()
+    currentCardID = currentQuestion.id
+    currentCardIndex = currentQuestion.index
+    continueGame(cards.get(currentCardID).prompt,cards.get(currentCardID).answer);
+    console.log(cards)
+  }
+
+
+
+
+function resetCardSet(){
+  idArray = mapToArray()
+  reset()
+
+
+}
 
 
 // Testing
