@@ -12,6 +12,8 @@ var idArray = [];
 var currentQuestion = {};
 var currentCardID = 0;
 var currentCardIndex = 0;
+var playerHealth = 4
+const damageTaken = 1
 
 // This will be the username taken from the landing page - change it eventually
 
@@ -517,38 +519,20 @@ function reset() {
 function resetCardSet() {
   idArray = mapToArray(cards);
   reset();
+  setHealthImg(playerHealth);
   document.body.removeChild(document.querySelector("#endScreen"));
 
 }
 
 
 function setHealthImg(health) {
+  console.log("in set health images")
   document.querySelector("#p-healthbar img").src = `./img/health${health}.png`;
 }
 
 
-// Testing
-console.log(cards);
-addCard("What is UCI's Mascot name?", "Peter");
-addCard("What year was UCI founded?", "1965");
-addCard("What is 1 + 1?", "2");
-addCard("Hey", "Hi");
-addCard("Type A", "A");
-addCard("Cake", "not real");
-console.log(cards);
-console.log(`The last card's ID is ${Card.currentID - 1}`);
-console.log(cards);
- 
-
 //array stores id's of all cards in the cards map
-var idArray = mapToArray(cards);
-console.log(idArray);
-var currentQuestion = selectRandomQuestion();
-console.log(cards)
-var currentCardID = currentQuestion.id;
-var currentCardIndex = currentQuestion.index;
-var playerHealth = 4
-const damageTaken = 1
+
 
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
