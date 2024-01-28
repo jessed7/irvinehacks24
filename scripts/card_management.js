@@ -330,6 +330,7 @@ function continueGame(prompt,answer) {
     var continuebtn = document.createElement("button");
     continuebtn.id = "continue";
     continuebtn.innerHTML = "next";
+    continuebtn.style.borderRadius = "10px";
     parent.appendChild(continuebtn);
     console.log(cards)
     continuebtn.addEventListener("click", function() {
