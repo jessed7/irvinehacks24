@@ -1,3 +1,5 @@
+const user = require("./models/user");
+
 const cards = new Map();
 
 // This class will represent each card
@@ -43,6 +45,7 @@ async function updateCardData(user, cards, cardCount, cardsAnswered) {
     cardCount: cardCount,
     cardsAnswered: cardsAnswered,
   });
+  console.log(cardData);
 
   fetch("http://localhost:5000/backup-cards", {
     method: "POST",
@@ -57,9 +60,9 @@ async function updateCardData(user, cards, cardCount, cardsAnswered) {
 }
 
 async function getUserData(userID) {
-  //this function will query to the back end and get the map of all the user data given a userID
+//this function will query to the back end and get the map of all the user data given a userID
 
-  //creating the URL
+//creating the URL
   const endpoint = "http://localhost:5000/get-user-cards";
   const queryParams = {
     user: userID,
@@ -74,5 +77,7 @@ async function getUserData(userID) {
   );
   const data = await response.json();
   const userData = new Map(Object.entries(data));
+  console.log(userData);
   return userData;
 }
+
