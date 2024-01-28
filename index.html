@@ -47,7 +47,7 @@
                         <button id="addflashcard" type="button" onclick="newCard()" style="padding-top: 5px; padding-bottom: 5px; width: 150px; border-radius: 10px;">+ Add Card</button>
                     </div>
                     <div class="col" style="width: fit-content;">
-                        <button id="studybtn" type="button" onclick="window.location.href = 'game.html'" style="padding-top: 5px; padding-bottom: 5px; width: 150px; border-radius: 10px;">Study!</button>
+                        <button id="studybtn" type="button" onclick="startGame()" style="padding-top: 5px; padding-bottom: 5px; width: 150px; border-radius: 10px;">Study!</button>
                     </div>
                 </div>
             </div>
@@ -55,6 +55,11 @@
     </section>
     <script>
         document.getElementById("user").innerText = document.cookie.split("=")[1];
+        async function startGame(){
+            await updateCardData();
+            window.location.href = 'game.html';
+        }
+
     </script>
     <script src="scripts/card_management.js"></script>
 </body>
