@@ -17,6 +17,12 @@ let numCorrect = 0;
 console.log("imported!")
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  if (document.title === "Game") {
+        const submitButton = document.querySelector("#submit-button");
+    submitButton.addEventListener("click", getAnswerText);
+    setPrompt(currentCardID);
+    document.querySelector("#text").innerHTML = cards.get(currentCardID).answer;
     console.log(cards)
   document
     .getElementById("submit-button")
@@ -52,7 +58,20 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(endScreen);
         document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
       }
-    });
+    }); }
+    else if (document.title === "Main") {
+      addExistingCards(cards);
+      let isEmpty;
+      document
+        .getElementById("addflashcard")
+        .addEventListener("click", function () {
+          const emptyImg = document.querySelector(".emptyImg");
+          if (emptyImg !== null) {
+            document.getElementById("flashcards").removeChild(emptyImg);
+          }
+        });
+      checkEmpty();
+    }
     
 });
 
@@ -99,28 +118,28 @@ function selectRandomQuestion() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  if (document.title === "Main") {
-    addExistingCards(cards);
-    let isEmpty;
-    document
-      .getElementById("addflashcard")
-      .addEventListener("click", function () {
-        const emptyImg = document.querySelector(".emptyImg");
-        if (emptyImg !== null) {
-          document.getElementById("flashcards").removeChild(emptyImg);
-        }
-      });
-    checkEmpty();
-  } else if (document.title === "Game") {
-    const submitButton = document.querySelector("#submit-button");
-    submitButton.addEventListener("click", getAnswerText);
-    setPrompt(currentCardID);
-    document.querySelector("#text").innerHTML = cards.get(currentCardID).answer;
+// document.addEventListener("DOMContentLoaded", function () {
+//   if (document.title === "Main") {
+//     addExistingCards(cards);
+//     let isEmpty;
+//     document
+//       .getElementById("addflashcard")
+//       .addEventListener("click", function () {
+//         const emptyImg = document.querySelector(".emptyImg");
+//         if (emptyImg !== null) {
+//           document.getElementById("flashcards").removeChild(emptyImg);
+//         }
+//       });
+//     checkEmpty();
+//   } else if (document.title === "Game") {
+//     const submitButton = document.querySelector("#submit-button");
+//     submitButton.addEventListener("click", getAnswerText);
+//     setPrompt(currentCardID);
+//     document.querySelector("#text").innerHTML = cards.get(currentCardID).answer;
 
-    //gameLoop();
-  }
-});
+//     //gameLoop();
+//   }
+// });
 
 // This class will represent each card
 class Card {
