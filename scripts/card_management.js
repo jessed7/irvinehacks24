@@ -360,7 +360,7 @@ function newPrompt(prompt = "cat",answer = 'dog') {
 function checkCorrect() {
     const currentQuestion = cards.get(currentCardID)
     // reminder to change comparison value to correct value stored in the database
-    if (document.getElementById("answer").value != currentQuestion.answer) {
+    if (document.getElementById("answer").value.toLowerCase() != currentQuestion.answer.toLowerCase()) {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
         currentQuestion.numWrong += 1;
