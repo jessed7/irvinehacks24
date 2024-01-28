@@ -239,7 +239,7 @@ function checkEmpty() {
   if (isEmpty) {
     var imagediv = document.createElement("div");
     var image = document.createElement("img");
-    image.src = "...";
+    image.src = "img/nocards.gif";
     imagediv.appendChild(image);
     imagediv.style.display = "flex";
     imagediv.style.alignItems = "center";
@@ -371,22 +371,24 @@ function addExistingCards() {
 // addCard("What is 1 + 1?", "2");
 // console.log(cards);
 // console.log(`The last card's ID is ${Card.currentID - 1}`);
-function continueGame(prompt, answer) {
-  console.log(cards);
-  var parent = document.getElementById("prompt-container");
-  var continuebtn = document.createElement("button");
-  continuebtn.id = "continue";
-  continuebtn.innerHTML = "next";
-  parent.appendChild(continuebtn);
-  console.log(cards);
-  continuebtn.addEventListener("click", function () {
-    console.log(cards);
-    newPrompt(prompt, answer);
-    var idleslime = document.getElementById("slime");
-    idleslime.src = "img/idle_slime.gif";
-    document.querySelector("#answer").classList.remove("wrong");
-    document.querySelector("#answer").classList.remove("right");
-  });
+function continueGame(prompt,answer) {
+    console.log(cards)
+    var parent = document.getElementById("prompt-container");
+    var continuebtn = document.createElement("button");
+    continuebtn.id = "continue";
+    continuebtn.innerHTML = "next";
+    parent.appendChild(continuebtn);
+    console.log(cards)
+    continuebtn.addEventListener("click", function() {
+        console.log(cards)
+        newPrompt(prompt,answer);
+        var idleslime = document.getElementById("slime");
+        idleslime.src = "img/idle_slime.gif";
+        var idleknight = document.getElementById("knight");
+        idleknight.src = "img/idle_knight.gif";
+        document.querySelector("#answer").classList.remove("wrong");
+        document.querySelector("#answer").classList.remove("right");
+    });
 }
 
 function newPrompt(prompt = "cat", answer = "dog") {
@@ -410,6 +412,8 @@ function checkCorrect() {
     if (document.getElementById("answer").value.toLowerCase() != currentQuestion.answer.toLowerCase()) {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
         var hurtknight = document.getElementById("knight");
         hurtknight.src = "img/hurt_knight.gif";
         currentQuestion.numWrong += 1;
@@ -436,7 +440,7 @@ function checkCorrect() {
         }
         
     }else{
-      var hurtslime = document.getElementById("slime");
+        var hurtslime = document.getElementById("slime");
         hurtslime.src = "img/hurt_slime.gif";
         var hitknight = document.getElementById("knight");
         hitknight.src = "img/hit_knight.gif";
