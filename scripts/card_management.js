@@ -501,6 +501,38 @@ function resetCardSet() {
   document.body.removeChild(document.querySelector("#endScreen"));
 }
 
+<<<<<<< HEAD
+=======
+
+function setHealthImg(health) {
+  document.querySelector("#p-healthbar img").src = `./img/health${health}.png`;
+}
+
+
+// Testing
+console.log(cards);
+addCard("What is UCI's Mascot name?", "Peter");
+addCard("What year was UCI founded?", "1965");
+addCard("What is 1 + 1?", "2");
+addCard("Hey", "Hi");
+addCard("Type A", "A");
+addCard("Cake", "not real");
+console.log(cards);
+console.log(`The last card's ID is ${Card.currentID - 1}`);
+console.log(cards);
+ 
+
+//array stores id's of all cards in the cards map
+var idArray = mapToArray(cards);
+console.log(idArray);
+var currentQuestion = selectRandomQuestion();
+console.log(cards)
+var currentCardID = currentQuestion.id;
+var currentCardIndex = currentQuestion.index;
+var playerHealth = 4
+const damageTaken = 1
+
+>>>>>>> 12da96d (Added function for changing health bar)
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
 // var currentCardId
