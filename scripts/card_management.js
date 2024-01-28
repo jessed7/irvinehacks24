@@ -422,9 +422,9 @@ function unpackUserData(userData) {
 
 
 function resetCardSet(){
-  idArray = mapToArray()
+  idArray = mapToArray(cards)
   reset()
-
+  document.body.removeChild(document.querySelector("#endScreen"));
 
 }
 
@@ -432,11 +432,11 @@ function resetCardSet(){
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
-// addCard("What year was UCI founded?", "1965");
-// addCard("What is 1 + 1?", "2");
-// addCard("Hey", "Hi");
-// addCard("Type A", "A");
-// addCard("Cake", "not real");
+addCard("What year was UCI founded?", "1965");
+addCard("What is 1 + 1?", "2");
+addCard("Hey", "Hi");
+addCard("Type A", "A");
+addCard("Cake", "not real");
 console.log(cards);
 console.log(`The last card's ID is ${Card.currentID - 1}`);
 console.log(cards);
