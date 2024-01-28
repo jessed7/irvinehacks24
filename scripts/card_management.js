@@ -518,6 +518,7 @@ function reset() {
 function resetCardSet() {
   idArray = mapToArray(cards);
   reset();
+  playerHealth = 4;
   setHealthImg(playerHealth);
   document.body.removeChild(document.querySelector("#endScreen"));
 
