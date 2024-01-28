@@ -340,6 +340,7 @@ function checkCorrect() {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
         currentQuestion.numWrong += 1
+        playerHealth -=1
         
     }else{
         currentQuestion.numRight +=1
@@ -452,7 +453,8 @@ console.log(cards);
 
 
 //array stores id's of all cards in the cards map
-var damageDealt = 1
+var damageTaken = 1
+var playerHealth = 4
 var idArray = mapToArray(cards);
 console.log(idArray);
 var currentQuestion = selectRandomQuestion();
@@ -460,7 +462,7 @@ console.log(cards)
 var currentCardID = currentQuestion.id;
 var currentCardIndex = currentQuestion.index;
 var enemyHealth = idArray.length
-var slime = new Enemy(enemyHealth,damageDealt)
+var slime = new Enemy(enemyHealth,damageTaken)
 
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
