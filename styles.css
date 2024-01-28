@@ -81,3 +81,7 @@
 .right {
     background-color: rgb(157, 235, 160);
 }
+
+#logo {
+    width: 150px;
+}
