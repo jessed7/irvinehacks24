@@ -343,6 +343,10 @@ function checkCorrect() {
         
     }else{
         currentQuestion.numRight +=1
+        slime.takeDamage()
+        if(slime.isDead){
+          console.log("slime is dead")
+        }
         deleteQuestion(currentCardIndex,idArray)
     }
 }
@@ -409,6 +413,31 @@ function resetCardSet(){
 }
 
 
+class Enemy{
+  constructor(health, damageTaken){
+      this.health = health
+      this.damageTaken = damageTaken
+      this.isDead = false
+  }
+
+  takeDamage(){
+      this.health-= damageTaken
+      if (this.health<=0){
+          this.isDead = true
+      }
+  }
+  isDead(){
+      return isDead
+  }
+}
+
+
+
+
+
+
+
+
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
@@ -423,12 +452,15 @@ console.log(cards);
 
 
 //array stores id's of all cards in the cards map
+var damageDealt = 1
 var idArray = mapToArray(cards);
 console.log(idArray);
 var currentQuestion = selectRandomQuestion();
 console.log(cards)
 var currentCardID = currentQuestion.id;
 var currentCardIndex = currentQuestion.index;
+var enemyHealth = idArray.length
+var slime = new Enemy(enemyHealth,damageDealt)
 
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
