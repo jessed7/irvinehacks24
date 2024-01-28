@@ -49,7 +49,7 @@ questions.pop()
 }
 
 //condition-> runs until array is empty
-function selectRandomQuestion(idArray){
+export function selectRandomQuestion(idArray){
     //uses a random index to select an id from the idArray and returns that index along with the id 
     //within an object literal.
     const randomIndex = Math.floor(Math.random(),idArray.length)
@@ -124,13 +124,13 @@ class Enemy{
 
 
 
-module.exports = {
-    mapToArray,
-    validateAnswer,
-    deleteQuestion,
-    selectRandomQuestion,
-    difficultySort
-}
+// module.exports = {
+//     mapToArray,
+//     validateAnswer,
+//     deleteQuestion,
+//     selectRandomQuestion,
+//     difficultySort
+// }
 
 
 
