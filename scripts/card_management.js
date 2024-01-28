@@ -461,6 +461,8 @@ function checkCorrect() {
 
           document.body.appendChild(endScreen);
           document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+          var continuebtn = document.getElementById("continue");
+          document.getElementById("prompt-container").removeChild(continuebtn);
         }
         
     }else{
