@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       console.log(cards)
       console.log("before empty check");
+      document.querySelector("#answer").value="";
       if (idArray.length === 0) {
         console.log("After empty");
         const endScreen = document.createElement('div');
