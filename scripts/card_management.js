@@ -502,8 +502,6 @@ function resetCardSet() {
   document.body.removeChild(document.querySelector("#endScreen"));
 }
 
-<<<<<<< HEAD
-=======
 
 function setHealthImg(health) {
   console.log("in set health images")
@@ -512,16 +510,15 @@ function setHealthImg(health) {
 
 
 //array stores id's of all cards in the cards map
-var idArray = mapToArray(cards);
-console.log(idArray);
-var currentQuestion = selectRandomQuestion();
-console.log(cards)
-var currentCardID = currentQuestion.id;
-var currentCardIndex = currentQuestion.index;
-var playerHealth = 4
-const damageTaken = 1
+// var idArray = mapToArray(cards);
+// console.log(idArray);
+// var currentQuestion = selectRandomQuestion();
+// console.log(cards)
+// var currentCardID = currentQuestion.id;
+// var currentCardIndex = currentQuestion.index;
+// var playerHealth = 4
+// const damageTaken = 1
 
->>>>>>> 12da96d (Added function for changing health bar)
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
 // var currentCardId
