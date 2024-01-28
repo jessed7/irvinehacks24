@@ -514,23 +514,11 @@ function resetCardSet() {
 
 }
 
-class Enemy{
-  constructor(health, damageTaken){
-      this.health = health
-      this.damageTaken = damageTaken
-      this.isDead = false
-  }
 
-  takeDamage(){
-      this.health-= damageTaken
-      if (this.health<=0){
-          this.isDead = true
-      }
-  }
-  isDead(){
-      return isDead
-  }
+function setHealthImg(health) {
+  document.querySelector("#p-healthbar img").src = `./img/health${health}.png`;
 }
+
 
 // Testing
 console.log(cards);
