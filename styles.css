@@ -25,6 +25,22 @@
     -ms-transform: translate(-50%, -50%);
 }
 
+#slime, #knight {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#flashcards {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#flashcards::-webkit-scrollbar {
+    display: none;
+}
+
 @keyframes tilt-shaking {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(2deg); }

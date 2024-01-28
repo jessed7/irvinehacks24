@@ -80,9 +80,6 @@ function addCardToScreen(id = -1, prompt="enter prompt", answer="enter answer") 
     `<div class="col" style="text-align: left; padding: 0;">
         <p id="promptinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${prompt}</p>
     </div>
-    <div class="col-1" style="width: fit-content;">
-        <h3 style="color: gainsboro;">|</h3>
-    </div>
     <div class="col" style="text-align: left; padding: 0;">
         <p id="answerinpt${cardID}" type="text" style="width: 100%; border: none; border-radius: 10px; background-color: white; padding: 7px;">${answer}</p>
     </div>
