@@ -367,6 +367,26 @@ function checkCorrect() {
         hurtknight.src = "img/hurt_knight.gif";
         currentQuestion.numWrong += 1;
         document.querySelector("#answer").classList.add("wrong");
+        playerHealth -= 1
+        if(playerHealth<=0){
+          var continuebtn = document.getElementById("continue");
+          document.getElementById("prompt-container").removeChild(continuebtn);
+          playerHealth = 4
+          console.log("player dead")
+          const endScreen = document.createElement('div');
+          endScreen.id = "endScreen";
+          endScreen.innerHTML = `
+          <div id="endContainer">
+          <p>You answered a total of ${numCorrect} questions correctly!</p>
+          <button>Study More</button>
+          </div>
+        ` ;
+          // const studyButton = document.querySelector("#endContainer button");
+          // console.log(studyButton)
+
+          document.body.appendChild(endScreen);
+          document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+        }
         
     }else{
       var hurtslime = document.getElementById("slime");
@@ -445,7 +465,23 @@ function resetCardSet(){
 
 }
 
+class Enemy{
+  constructor(health, damageTaken){
+      this.health = health
+      this.damageTaken = damageTaken
+      this.isDead = false
+  }
 
+  takeDamage(){
+      this.health-= damageTaken
+      if (this.health<=0){
+          this.isDead = true
+      }
+  }
+  isDead(){
+      return isDead
+  }
+}
 
 // Testing
 console.log(cards);
@@ -467,6 +503,8 @@ var currentQuestion = selectRandomQuestion();
 console.log(cards)
 var currentCardID = currentQuestion.id;
 var currentCardIndex = currentQuestion.index;
+var playerHealth = 4
+const damageTaken = 1
 
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
