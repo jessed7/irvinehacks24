@@ -368,10 +368,12 @@ function checkCorrect() {
         currentQuestion.numWrong += 1;
         document.querySelector("#answer").classList.add("wrong");
         playerHealth -= 1
+        setHealthImg(playerHealth)
         if(playerHealth<=0){
           var continuebtn = document.getElementById("continue");
           document.getElementById("prompt-container").removeChild(continuebtn);
           playerHealth = 4
+          setHealthImg(playerHealth)
           console.log("player dead")
           const endScreen = document.createElement('div');
           endScreen.id = "endScreen";
@@ -465,23 +467,11 @@ function resetCardSet(){
 
 }
 
-class Enemy{
-  constructor(health, damageTaken){
-      this.health = health
-      this.damageTaken = damageTaken
-      this.isDead = false
-  }
 
-  takeDamage(){
-      this.health-= damageTaken
-      if (this.health<=0){
-          this.isDead = true
-      }
-  }
-  isDead(){
-      return isDead
-  }
+function setHealthImg(health) {
+  document.querySelector("#p-healthbar img").src = `./img/health${health}.png`;
 }
+
 
 // Testing
 console.log(cards);
