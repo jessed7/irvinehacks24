@@ -307,6 +307,8 @@ function continueGame(prompt,answer) {
     continuebtn.addEventListener("click", function() {
         console.log(cards)
         newPrompt(prompt,answer);
+        var idleslime = document.getElementById("slime");
+        idleslime.src = "img/idle_slime.gif";
     });
 }
 
