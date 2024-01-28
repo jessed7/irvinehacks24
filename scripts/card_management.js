@@ -415,6 +415,8 @@ function checkCorrect() {
         container.style.animation = "tilt-shaking 0.3s";
         var hurtknight = document.getElementById("knight");
         hurtknight.src = "img/hurt_knight.gif";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
         currentQuestion.numWrong += 1;
         document.querySelector("#answer").classList.add("wrong");
         playerHealth -= 1
