@@ -370,8 +370,6 @@ function checkCorrect() {
         playerHealth -= 1
         setHealthImg(playerHealth)
         if(playerHealth<=0){
-          var continuebtn = document.getElementById("continue");
-          document.getElementById("prompt-container").removeChild(continuebtn);
           playerHealth = 4
           setHealthImg(playerHealth)
           console.log("player dead")
@@ -388,6 +386,8 @@ function checkCorrect() {
 
           document.body.appendChild(endScreen);
           document.querySelector("#endContainer button").addEventListener("click", resetCardSet);
+          var continuebtn = document.getElementById("continue");
+          document.getElementById("prompt-container").removeChild(continuebtn);
         }
         
     }else{
