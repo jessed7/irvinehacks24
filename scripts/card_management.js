@@ -446,6 +446,10 @@ function resetCardSet(){
 }
 
 
+function setHealthImg(health) {
+  document.querySelector("#p-healthbar img").src = `./img/health${health}.png`;
+}
+
 
 // Testing
 console.log(cards);
