@@ -1,19 +1,14 @@
 // This file contains the code to manage the retrieving, editing, and storing of flashcards
 
-const user = require("./models/User");
-
 /* 
 When database storing is set up, follow this logic:
     1. If the player username is in the database, then place the flashcard data from the DB into the cards object
     2. If the username is not in the database, create a new Map to represent the cards
 */
 const cards = new Map();
+console.log(cards);
 
-// This will be the username taken from the landing page - change it eventually
-const username = "name";
-
-// Update the cardsAnswered variable with data from DB
-let answered = 0;
+console.log("imported!")
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log(cards)
@@ -101,14 +96,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // This class will represent each card
 class Card {
-    static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
-    constructor(id, prompt, answer, numRight=0, numWrong=0) {
-        this.id = id;
-        this.prompt = prompt;
-        this.answer = answer;
-        this.numRight = numRight;
-        this.numWrong = numWrong;
-    }
+  static currentID = 0; // When DB is implemented, save this number to be imported whenever data is imported
+  constructor(id, prompt, answer) {
+    this.id = id;
+    this.prompt = prompt;
+    this.answer = answer;
+    this.numRight = 0;
+    this.numWrong = 0;
+  }
 }
 
 function addCard(prompt, answer) {
@@ -361,33 +356,6 @@ function deleteQuestion(index,questions){
 
 
 
-
-// This is code for packaging the data 
-function packUserData() {
-    const user = {
-        user: username,
-        items: [],
-        cardCount: Card.currentID,
-        cardsAnswered: numCorrect // Add code for tracking cards answered
-    }
-
-    for (let i = 0; i < cards.size; i++) {
-        user.items.push(cards.get(i));
-    }
-
-    return JSON.stringify(user);
-}
-
-// This code unpacks the data from the DB into the cards map
-function unpackUserData(userData) {
-    Card.currentID = userData.get("cardCount");
-    numCorrect = userData.get("cardsAnswered"); // Change var name as needed
-    let cardArray = userData.get("items");
-
-    for(card of cardArray) {
-        cards.set(card.id, new Card(card.id, card.prompt, card.asnwer, card.numRight, card.numWrong));
-    }
-}
 
 // Testing
 console.log(cards);
