@@ -337,6 +337,8 @@ function continueGame(prompt,answer) {
         newPrompt(prompt,answer);
         var idleslime = document.getElementById("slime");
         idleslime.src = "img/idle_slime.gif";
+        document.querySelector("#answer").classList.remove("wrong");
+        document.querySelector("#answer").classList.remove("right");
     });
 }
 
@@ -361,12 +363,14 @@ function checkCorrect() {
     if (document.getElementById("answer").value != currentQuestion.answer) {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
-        currentQuestion.numWrong += 1
+        currentQuestion.numWrong += 1;
+        document.querySelector("#answer").classList.add("wrong");
         
     }else{
         currentQuestion.numRight +=1
         deleteQuestion(currentCardIndex,idArray)
         numCorrect++;
+        document.querySelector("#answer").classList.add("right");
 
     }
 }

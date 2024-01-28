@@ -68,3 +68,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.wrong {
+    background-color: rgb(255, 172, 172);
+}
+
+.right {
+    background-color: rgb(157, 235, 160);
+}
