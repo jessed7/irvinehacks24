@@ -405,22 +405,27 @@ function newPrompt(prompt = "cat", answer = "dog") {
 }
 
 function checkCorrect() {
-  const currentQuestion = cards.get(currentCardID);
-  // reminder to change comparison value to correct value stored in the database
-  if (
-    document.getElementById("answer").value.toLowerCase() !=
-    currentQuestion.answer.toLowerCase()
-  ) {
-    var container = document.getElementById("prompt");
-    container.style.animation = "tilt-shaking 0.3s";
-    currentQuestion.numWrong += 1;
-    document.querySelector("#answer").classList.add("wrong");
-  } else {
-    currentQuestion.numRight += 1;
-    deleteQuestion(currentCardIndex, idArray);
-    numCorrect++;
-    document.querySelector("#answer").classList.add("right");
-  }
+    const currentQuestion = cards.get(currentCardID)
+    // reminder to change comparison value to correct value stored in the database
+    if (document.getElementById("answer").value.toLowerCase() != currentQuestion.answer.toLowerCase()) {
+        var container = document.getElementById("prompt");
+        container.style.animation = "tilt-shaking 0.3s";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
+        currentQuestion.numWrong += 1;
+        document.querySelector("#answer").classList.add("wrong");
+        
+    }else{
+      var hurtslime = document.getElementById("slime");
+        hurtslime.src = "img/hurt_slime.gif";
+        var hitknight = document.getElementById("knight");
+        hitknight.src = "img/hit_knight.gif";
+        currentQuestion.numRight +=1
+        deleteQuestion(currentCardIndex,idArray)
+        numCorrect++;
+        document.querySelector("#answer").classList.add("right");
+
+    }
 }
 
 function deleteQuestion(index, questions) {
