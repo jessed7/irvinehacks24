@@ -5,7 +5,7 @@ When database storing is set up, follow this logic:
     1. If the player username is in the database, then place the flashcard data from the DB into the cards object
     2. If the username is not in the database, create a new Map to represent the cards
 */
-
+const userID = document.cookie;
 const cards = new Map();
 console.log(cards);
 
@@ -464,5 +464,64 @@ var currentCardIndex = currentQuestion.index;
 // var currentCardIndex
 
 console.log(cards)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function updateCardData(user, cards, cardCount, cardsAnswered) {
+  let cardData = JSON.stringify({
+    user: user,
+    items: Array.from(cards.values()),
+    cardCount: cardCount,
+    cardsAnswered: cardsAnswered,
+  });
+  console.log(cardData);
+
+  fetch("http://localhost:5000/backup-cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: cardData,
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+}
+
+async function getUserData(userID) {
+//this function will query to the back end and get the map of all the user data given a userID
+
+//creating the URL
+  const endpoint = "http://localhost:5000/get-user-cards";
+  const queryParams = {
+    user: userID,
+  };
+  const queryString = new URLSearchParams(queryParams).toString();
+  const url = `${endpoint}?${queryString}`;
+
+  //this will get the user data from the server based on the given userID, that should be a string, and
+  //then it will get the json file and return a map of all the data
+  const response = await fetch(url).catch((error) =>
+    console.error("Error:", error)
+  );
+  const data = await response.json();
+  const userData = new Map(Object.entries(data));
+  console.log(userData);
+  return userData;
+}
+
 
 

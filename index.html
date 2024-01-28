@@ -28,7 +28,7 @@
             <span id="setname">
                 <div class="row" style="width: fit-content;">
                     <div class="col" style="display: flex; width: fit-content; text-align: end; align-items: center; justify-content: end; padding: 0;">
-                        <h5 style="margin-bottom: 0;">Set Name</h5>
+                        <h5 id="user" style="margin-bottom: 0;">Set Name</h5>
                     </div>
                     <div class="col-1" style="width: fit-content; padding: 0;">
                         <button class="button" style="border: none; padding: 7px; background-color: white;">&#128393;</button>
@@ -52,7 +52,9 @@
             </div>
         </div>
     </section>
-
+    <script>
+        document.getElementById("user").innerText = document.cookie;
+    </script>
     <script src="scripts/card_management.js"></script>
 </body>
 </html>
