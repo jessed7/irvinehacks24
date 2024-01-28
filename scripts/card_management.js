@@ -531,9 +531,6 @@ function setHealthImg(health) {
 }
 
 
-//array stores id's of all cards in the cards map
-
-
 // var playerHealth = 100//arbitrary integer
 // var numCorrect = 0
 // var currentCardId
