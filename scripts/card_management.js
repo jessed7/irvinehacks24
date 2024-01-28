@@ -363,10 +363,16 @@ function checkCorrect() {
     if (document.getElementById("answer").value.toLowerCase() != currentQuestion.answer.toLowerCase()) {
         var container = document.getElementById("prompt");
         container.style.animation = "tilt-shaking 0.3s";
+        var hurtknight = document.getElementById("knight");
+        hurtknight.src = "img/hurt_knight.gif";
         currentQuestion.numWrong += 1;
         document.querySelector("#answer").classList.add("wrong");
         
     }else{
+      var hurtslime = document.getElementById("slime");
+        hurtslime.src = "img/hurt_slime.gif";
+        var hitknight = document.getElementById("knight");
+        hitknight.src = "img/hit_knight.gif";
         currentQuestion.numRight +=1
         deleteQuestion(currentCardIndex,idArray)
         numCorrect++;
@@ -436,7 +442,7 @@ function resetCardSet(){
 
 }
 
-/* 
+
 // Testing
 console.log(cards);
 addCard("What is UCI's Mascot name?", "Peter");
@@ -448,7 +454,7 @@ addCard("Cake", "not real");
 console.log(cards);
 console.log(`The last card's ID is ${Card.currentID - 1}`);
 console.log(cards);
- */
+ 
 
 //array stores id's of all cards in the cards map
 var idArray = mapToArray(cards);
